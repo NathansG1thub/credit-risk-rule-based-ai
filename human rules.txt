@@ -1,0 +1,58 @@
+6–8 rules, numbered in priority order
+Mix of approve and decline
+1–3 conditions each, exact decoded strings
+Specific before general; no dead rules
+Round thresholds you can justify in words
+A BECAUSE for every rule
+No banned columns; age decision documented
+Written before looking at any performance
+Saved in the repo with a date
+
+IF, THEN, AND, OR, IS/IS NOT, IS ONE OF, ><, BECAUSE, OTHERWISE
+
+R1. 
+IF history IS past_delay
+THEN decline
+BECAUSE a documented history of late repayment is the most direct evidence in the file of future repayment difficulty.
+
+R2. 
+IF checking IS ONE OF [below_0, 0_to_200, none] AND employment IS unemployed
+THEN decline
+BECAUSE with no employment income and no visible account buffer at this bank, there is nothing to absorb a shock.
+
+R3. 
+IF instalment_rate IS at least 4 AND savings IS ONE OF [below_100, none_unknown]
+THEN decline
+BECAUSE the highest instalment burden leaves almost no disposable headroom, and with little or no recorded savings there is no buffer to absorb a shock — repayment capacity is exhausted before any adverse event even occurs.
+
+R4. 
+IF history IS critical_other_credits AND employment IS unemployed AND amount IS greater than 5000
+THEN decline
+BECAUSE with no employment income, existing credit commitments elsewhere, and a large new exposure, there is no credible repayment capacity — even a healthy account balance does not offset the absence of income.
+
+R5. 
+IF other_debtors IS guarantor AND employment IS ONE OF [lt_1y, 1_to_4y, 4_to_7y, gte_7y]
+THEN approve
+BECAUSE a third party guarantees repayment, sharing the default risk, and the applicant has some employment income.
+
+R6. 
+IF history IS critical_other_credits AND employment IS ONE OF [4_to_7y, gte_7y] AND amount IS at most 5000
+THEN approve
+BECAUSE long-established employment (4+ years) is accepted as evidence of repayment capacity in place of a local track record, deliberately overriding the 'critical account' connotation of the category on the strength of stable tenure — but only for modest exposures; larger loans still demand a local record.
+
+R7. 
+IF history IS ONE OF [all_paid_this_bank, paid_duly] AND checking IS ONE OF [0_to_200, above_200] AND employment IS ONE OF [lt_1y, 1_to_4y, 4_to_7y, gte_7y] AND amount IS at most 1000
+THEN approve
+BECAUSE a clean record with a visible buffer justifies a small exposure even on short employment tenure.
+
+R8. 
+IF history IS ONE OF [all_paid_this_bank, paid_duly] AND checking IS ONE OF [0_to_200, above_200] AND employment IS ONE OF [4_to_7y, gte_7y] AND amount IS greater than 1000
+THEN approve
+BECAUSE for larger exposures, a clean record and buffer are accepted only with long-established employment — size demands stability.
+
+R9. 
+IF history IS no_credits AND employment IS ONE OF [1_to_4y, 4_to_7y, gte_7y] AND amount IS at most 5000
+THEN approve
+BECAUSE with no repayment evidence on file, approval is limited to modest exposures backed by several years of stable employment.
+DEFAULT. OTHERWISE decline
+BECAUSE under the 5:1 cost asymmetry, declining an uncertain applicant is the cheaper error.
